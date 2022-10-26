@@ -5,11 +5,8 @@ def main():
     global app
     app = Flask(__name__)
     config.app = app
-    print(config.ROOT)
-
-    @app.route("/test")
-    def hello():
-        return f"Hello!"
+    
+    config.register_urls()
 
     return app
 

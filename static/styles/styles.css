@@ -1,0 +1,17 @@
+.btn {
+    padding: 8px 18px;
+    background: unset;
+    border-radius: 6px;
+    border: 1px solid transparent;
+    font-weight: 600;
+    cursor: pointer;
+}
+.btn-submit {
+    background: lightseagreen;
+    color: white;
+}
+.center-align {
+    position: absolute;
+    top: 65%;
+    left: 50%;
+}

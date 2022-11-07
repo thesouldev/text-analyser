@@ -3,7 +3,7 @@ import config
 
 def main():
     global app
-    app = Flask(__name__)
+    app = Flask(__name__, template_folder='template')
     config.app = app
     
     config.register_urls()

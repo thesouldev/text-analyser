@@ -3,6 +3,8 @@ from models.odb import ndb
 
 from models.users import UserAccount
 
+MODULE = 'text_analyser'
+
 class UserLogin(MethodView):
     def get(self):
         breakpoint()

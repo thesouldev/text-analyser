@@ -1,7 +1,7 @@
 import os
 
 from modules.text_analyser.base import UserLogin
-from modules.text_analyser.views import DashboardView
+from modules.text_analyser.views import DashboardView, TextAnalyseView
 
 ROOT = os.path.dirname(__file__)
 
@@ -9,8 +9,10 @@ app = None
 
 ROUTE_MAPPING = [
     ('/user', UserLogin, 'user_login'),
-    ('/', DashboardView, 'dashboard')
+    ('/', DashboardView, 'dashboard'),
+    ('/analyse/<id>', TextAnalyseView, 'text_analyse')
 ]
+
 
 def register_urls():
     for url in ROUTE_MAPPING:

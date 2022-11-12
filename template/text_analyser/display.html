@@ -2,11 +2,42 @@
 <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/text-analyser.css') }}">
 <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/styles.css') }}">
 
-<textarea class="text-analyser" rows="4" cols="50">
+<textarea class="text-analyser" id="text-area-content" rows="4" cols="50">
 </textarea>
 <br>
-<div class="center-align">
+<div class="center-align" id="btn-analyse">
     <button class="btn btn-submit">
-        Submit
+        Analyse
     </button>
 </div>
+
+<script>
+    var myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+
+    const analyseButton = document.getElementById('btn-analyse')
+    analyseButton.addEventListener('click', function () {
+
+        var text_content = document.getElementById('text-area-content').value;
+        var payload = JSON.stringify({
+            "data": text_content
+        });
+        var requestOptions = {
+            method: 'POST',
+            headers: myHeaders,
+            body: payload,
+            redirect: 'follow'
+        };
+        const URLBase = window.location.origin
+        fetch(URLBase, requestOptions)
+            .then(response => response.text())
+            .then(result => {
+                var res = JSON.parse(result)
+                if (res['id']) {
+                    window.location.href = URLBase + '/analyse/' + res['id'];
+                }
+            })
+            .catch(error => console.log('error', error));
+    });
+
+</script>

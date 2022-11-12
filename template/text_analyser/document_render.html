@@ -1,0 +1,12 @@
+{% include 'header.html' %}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/text-analyser.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/styles.css') }}">
+
+<textarea class="text-analyser" id="text-area-content" rows="4" cols="50">{{ template_values['text'] }}
+</textarea>
+<br>
+<div class="center-align" id="btn-analyse">
+    <button class="btn btn-submit">
+        Analyse
+    </button>
+</div>

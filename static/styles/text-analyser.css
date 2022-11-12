@@ -1,5 +1,13 @@
 .text-analyser {
     width: -webkit-fill-available;
-    margin: 4rem;
+    margin: 3rem;
     height: 50vh;
+}
+.center-align {
+    margin: 0;
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
 }

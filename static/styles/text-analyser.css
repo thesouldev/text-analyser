@@ -3,6 +3,7 @@
     margin: 3rem;
     height: 50vh;
 }
+
 .center-align {
     margin: 0;
     position: absolute;
@@ -10,4 +11,34 @@
     left: 50%;
     -ms-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
+}
+
+.checkbox-wrap {
+    display: flex;
+}
+
+.checkbox-align {
+    padding: 0 18px;
+}
+
+.select-align {
+    padding: 0 8px;
+}
+
+.align-analyse {
+    top: 110%;
+}
+
+@media only screen and (max-width:480px) {
+    .checkbox-wrap {
+        display: unset;
+    }
+
+    .select-align {
+        padding: 4px 8px;
+    }
+
+    .align-analyse {
+        top: 112%;
+    }
 }

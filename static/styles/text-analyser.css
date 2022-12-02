@@ -29,6 +29,29 @@
     top: 110%;
 }
 
+td {
+    width: 40%;
+}
+
+.sentiment-table {
+    margin: 0 5rem;
+}
+
+table,
+th,
+td {
+    border: 1px solid black;
+    border-collapse: collapse;
+    padding: 12px;
+    width: -webkit-fill-available;
+    position: inherit;
+}
+
+.sub-title {
+    font-size: 20px;
+    font-weight: 700;
+}
+
 @media only screen and (max-width:480px) {
     .checkbox-wrap {
         display: unset;
@@ -40,5 +63,13 @@
 
     .align-analyse {
         top: 112%;
+    }
+
+    td {
+        width: 48%;
+    }
+
+    .sentiment-table {
+        margin: 0 2rem;
     }
 }

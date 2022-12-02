@@ -8,21 +8,30 @@ from flask import request
 from modules.text_analyser import base
 import uuid
 
+from modules.text_analyser.analyse import AnalyseDocument
+
 
 class DashboardView(MethodView):
     def get(self):
-        return render_template('text_analyser/display.html')
+        return render_template("text_analyser/display.html")
 
     def post(self):
         request_data = json.loads(request.data)
-        raw_data = request_data.get('data')
+        raw_data = request_data.get("data")
         id = uuid.uuid4().hex
         client = ndb.Client()
         with client.context():
-            DocumentEntity.create(id, raw_data, namespace=base.MODULE)
+            DocumentEntity.create(
+                id,
+                raw_data,
+                is_sentiment_analysis=request_data.get("sentiment"),
+                is_toxic_analysis=request_data.get("toxic"),
+                is_context_analysis=request_data.get("context"),
+                namespace=base.MODULE,
+            )
             DocumentEntity.query().fetch()
 
-        request_data['id'] = id
+        request_data["id"] = id
 
         return json.dumps(request_data), 201
 
@@ -33,9 +42,15 @@ class TextAnalyseView(MethodView):
         with client.context():
             query = DocumentEntity.get_by_id(id, namespace=base.MODULE)
             template_values = {}
-            template_values['text'] = query.document
-
-        return render_template('text_analyser/document_render.html', template_values=template_values)
+            template_values["text"] = query.document
+            response_payload = {"sentiment": {"is_valid": query.is_sentiment_analysis}}
+            obj = AnalyseDocument(query.document)
+            if query.is_sentiment_analysis:
+                response_payload["sentiment"]["response"] = obj.analyse_sentiment()
+            template_values["report"] = response_payload
+        return render_template(
+            "text_analyser/document_render.html", template_values=template_values
+        )
 
     def post(self, id):
         return

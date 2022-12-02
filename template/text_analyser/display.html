@@ -5,21 +5,21 @@
     <textarea class="text-analyser" id="text-area-content" rows="4" cols="50">
 </textarea>
     <br>
-    <div class="center-align" id="btn-analyse">
+    <div class="center-align">
         <div class="checkbox-wrap">
-            <div class="select-align"><input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">
-                <label for="vehicle1">Sentiment Analysis</label>
+            <div class="select-align"><input type="checkbox" id="sentiment" name="sentiment" value="Bike">
+                <label for="sentiment">Sentiment Analysis</label>
             </div>
-            <div class="select-align"><input type="checkbox" id="vehicle2" name="vehicle2" value="Car">
-                <label for="vehicle2">Detect Toxic Language</label>
+            <div class="select-align"><input type="checkbox" id="toxic" name="toxic" value="Car">
+                <label for="toxic">Detect Toxic Language</label>
             </div>
-            <div class="select-align"><input type="checkbox" id="vehicle3" name="vehicle3" value="Boat">
-                <label for="vehicle3">Identify Context</label>
+            <div class="select-align"><input type="checkbox" id="context" name="context" value="Boat">
+                <label for="context">Identify Context</label>
             </div>
         </div>
     </div>
     <div class="center-align align-analyse">
-        <button class="btn btn-submit">
+        <button class="btn btn-submit" id="btn-analyse">
             Analyse
         </button>
     </div>
@@ -32,8 +32,14 @@
     analyseButton.addEventListener('click', function () {
 
         var text_content = document.getElementById('text-area-content').value;
+        var sentiment = document.getElementById('sentiment').checked;
+        var context = document.getElementById('context').checked;
+        var toxic = document.getElementById('toxic').checked;
         var payload = JSON.stringify({
-            "data": text_content
+            "data": text_content,
+            "toxic": toxic,
+            "sentiment": sentiment,
+            "context": context
         });
         var requestOptions = {
             method: 'POST',

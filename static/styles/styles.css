@@ -18,8 +18,9 @@
     right: 0;
     position: absolute;
     font-size: 32px;
-    padding: 8px 24px;
+    padding: 8px 0px;
     top: 0;
+    margin: 0 5rem;
 }
 
 body {

@@ -6,7 +6,22 @@
     font-weight: 600;
     cursor: pointer;
 }
+
 .btn-submit {
     background: lightseagreen;
     color: white;
+}
+
+.fa-github {
+    content: "\f09b";
+    color: white;
+    right: 0;
+    position: absolute;
+    font-size: 32px;
+    padding: 8px 24px;
+    top: 0;
+}
+
+body {
+    color: #1d2327;
 }

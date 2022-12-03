@@ -2,7 +2,7 @@
 <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/text-analyser.css') }}">
 <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/styles.css') }}">
 
-<div style="position: relative;">
+<div style="position: relative; margin-bottom: 5rem;">
     <textarea class="text-analyser" id="text-area-content" rows="4" cols="50" readonly="true">{{ template_values['text'] }}
 </textarea>
     <br>
@@ -11,27 +11,81 @@
             Analyse
         </button> -->
     </div>
+    {% if template_values['report']['context']['is_valid'] %}
+    <div class="sentiment-table">
+        <p class="sub-title">
+            Context Analysis
+        </p>
+        {% for category in template_values['report']['context']['response'].categories %}
+        <div class="context-box row">
+            <div class="column">
+                <div class="context-title">
+                    Category
+                </div>
+                <div>
+                    {{category.name.replace('/', ' ')}}
+                </div>
+            </div>
+            <div class="column">
+                <div class="context-title">
+                    Confidence
+                </div>
+                <div>
+                    <progress id="file" value="{{category.confidence * 100}}" max="100"></progress>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
     {% if template_values['report']['sentiment']['is_valid'] %}
     <div class="sentiment-table">
         <p class="sub-title">
-            Sentiment Analysis Report
+            Sentiment Analysis
         </p>
         <table>
             <thead>
                 <tr>
-                  <th class="th-senti">Sentences</th>
-                  <th class="th-senti" >Score</th>
-                  <th class="th-senti" >Magnitude</th>
+                    <th class="th-senti">Sentences</th>
+                    <th class="th-senti">Score</th>
+                    <th class="th-senti">Magnitude</th>
                 </tr>
-              </thead>
+            </thead>
             {% for sentence in template_values['report']['sentiment']['response'].sentences %}
             <TR>
-               <TD class="td-senti">{{sentence.text.content}}</TD>
-               <TD class="td-senti" style="text-align: center;">{{(sentence.sentiment.score *100) |round(1) }}%</TD>
-               <TD class="td-senti" style="text-align: center;"><SPAN>{{sentence.sentiment.magnitude|round(1) }}</SPAN></TD>
+                <TD class="td-senti">{{sentence.text.content}}</TD>
+                <TD class="td-senti" style="text-align: center;">{{(sentence.sentiment.score *100) |round(1) }}%</TD>
+                <TD class="td-senti" style="text-align: center;"><SPAN>{{sentence.sentiment.magnitude|round(1) }}</SPAN>
+                </TD>
             </TR>
             {% endfor %}
-            </table>
+        </table>
+    </div>
+    {% endif %}
+    {% if template_values['report']['toxic']['is_valid'] %}
+    <div class="sentiment-table">
+        <p class="sub-title">
+            Toxicity Analysis
+        </p>
+        <div class="context-box row">
+            <div class="column">
+                <div class="context-title">
+                    Type
+                </div>
+                <div>
+                    {{template_values['report']['toxic']['response']['type']}}
+                </div>
+            </div>
+            <div class="column">
+                <div class="context-title">
+                    Toxicity Score
+                </div>
+                <div>
+                    <progress id="file" value="{{template_values['report']['toxic']['response']['value'] * 100}}"
+                        max="100"></progress>
+                </div>
+            </div>
+        </div>
     </div>
     {% endif %}
 </div>

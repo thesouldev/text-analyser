@@ -43,14 +43,22 @@ class TextAnalyseView(MethodView):
             query = DocumentEntity.get_by_id(id, namespace=base.MODULE)
             template_values = {}
             template_values["text"] = query.document
-            response_payload = {"sentiment": {"is_valid": query.is_sentiment_analysis}}
+            response_payload = {
+                "sentiment": {"is_valid": query.is_sentiment_analysis},
+                "context": {"is_valid": query.is_context_analysis},
+                "toxic": {"is_valid": query.is_toxic_analysis},
+            }
+
             obj = AnalyseDocument(query.document)
             if query.is_sentiment_analysis:
                 response_payload["sentiment"]["response"] = obj.analyse_sentiment()
+            if query.is_sentiment_analysis:
+                response_payload["context"]["response"] = obj.analyse_context()
+            if query.is_toxic_analysis:
+                response_payload["toxic"]["response"] = obj.analyse_toxicity()
+
             template_values["report"] = response_payload
+
         return render_template(
             "text_analyser/document_render.html", template_values=template_values
         )
-
-    def post(self, id):
-        return

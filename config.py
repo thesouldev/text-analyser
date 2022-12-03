@@ -7,11 +7,16 @@ ROOT = os.path.dirname(__file__)
 
 app = None
 
+
 ROUTE_MAPPING = [
-    ('/user', UserLogin, 'user_login'),
-    ('/', DashboardView, 'dashboard'),
-    ('/analyse/<id>', TextAnalyseView, 'text_analyse')
+    ("/user", UserLogin, "user_login"),
+    ("/", DashboardView, "dashboard"),
+    ("/analyse/<id>", TextAnalyseView, "text_analyse"),
 ]
+
+
+class Config:
+    PERSPECTIVE_API_KEY = ""
 
 
 def register_urls():

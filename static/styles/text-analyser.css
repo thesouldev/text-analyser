@@ -1,7 +1,7 @@
 .text-analyser {
     width: -webkit-fill-available;
     margin: 3rem;
-    height: 50vh;
+    height: 25vh;
 }
 
 .center-align {
@@ -50,6 +50,34 @@ td {
 .sub-title {
     font-size: 20px;
     font-weight: 700;
+    color: #00a32a;
+}
+
+.th-senti {
+    background-color: black;
+    color: white;
+}
+
+.context-box {
+    display: flex;
+    background: aliceblue;
+}
+
+.column {
+    float: left;
+    width: 50%;
+    padding: 10px;
+}
+
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.context-title {
+    font-weight: bold;
+    padding: 12px 0;
 }
 
 @media only screen and (max-width:480px) {

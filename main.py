@@ -15,4 +15,4 @@ def main():
 if __name__ == "__main__":
     main()
     app.config.from_object("config.Config")
-    app.run(debug=True, port=8080)
+    app.run(debug=False)

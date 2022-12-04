@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: text-analyer
+  labels:
+    name: text-analyer
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      name: text-analyer
+  template:
+    metadata:
+      name: text-analyer
+      labels:
+        name: text-analyer
+    spec:
+      containers:
+        - name: text-analyer
+          image: gcr.io/eminent-enigma-364712/text-analyser:v1.0
+          ports:
+            - containerPort: 8082
